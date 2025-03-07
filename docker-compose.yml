@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  health-check:
+    build: .
+    environment:
+      - TELEGRAM_BOT_TOKEN=7064011098:AAEK_O1nUUPC3Rq28zGQPf96v-4NggTl7Ko
+      - TELEGRAM_CHAT_ID=6151865959
