@@ -6,7 +6,7 @@ TELEGRAM_CHAT_ID="$TELEGRAM_CHAT_ID"
 
 # Mảng danh sách các server cần ping (chỉ cần host)
 SERVERS=(
-    "192.168.1.206:8081"  # Server 1
+    "192.168.1.206:8080"  # Server 1
     "staging-idempiere.fahasa.com"  # Server 2
     "erp-ops.fahasa.com"      # Server 3
 )
