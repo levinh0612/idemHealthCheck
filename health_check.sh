@@ -27,6 +27,20 @@ send_telegram_message() {
         -d parse_mode="Markdown"
 }
 
+# Kiểm tra kết nối với bot Telegram khi khởi động lần đầu
+FIRST_RUN_FILE="/app/.firstrun"
+if [ ! -f "$FIRST_RUN_FILE" ]; then
+    # Test kết nối với bot
+    if curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+        -d chat_id="$TELEGRAM_CHAT_ID" \
+        -d text="Test connection" > /dev/null 2>&1; then
+        send_telegram_message "✅ *Bot check health idem đã được chạy vào lúc:* `date '+%Y-%m-%d %H:%M:%S'`"
+        touch "$FIRST_RUN_FILE"  # Đánh dấu đã chạy lần đầu
+    else
+        echo "Lỗi: Không thể kết nối với Telegram API. Kiểm tra TELEGRAM_BOT_TOKEN và TELEGRAM_CHAT_ID."
+    fi
+fi
+
 # Kiểm tra server bằng ping
 for SERVER_HOST in "${SERVERS[@]}"; do
     ping -c 4 "$SERVER_HOST" > /dev/null 2>&1
