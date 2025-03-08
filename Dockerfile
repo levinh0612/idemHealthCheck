@@ -4,10 +4,13 @@ FROM ubuntu:20.04
 RUN apt-get update && apt-get install -y \
     curl \
     iputils-ping \
+    mysql-client \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Sao chép script vào container
+# Sao chép script vào container và cấp quyền thực thi
 COPY health_check.sh /app/health_check.sh
+RUN chmod +x /app/health_check.sh
 
 # Đặt thư mục làm việc
 WORKDIR /app
